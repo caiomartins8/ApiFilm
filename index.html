@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetFlix</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header class="header" id="header">
+        <div class="logo">NETFLIX</div>
+        <nav class="nav-links">
+            <a href="#">Início</a>
+            <a href="#">Séries</a>
+            <a href="#">Filmes</a>
+            <a href="#">Bombando</a>
+            <a href="#">Minha Lista</a>
+        </nav>
+        <div class="user-area">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png" alt="User">
+        </div>
+    </header>
+
+    <main class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">STRANGER THINGS</h1>
+            <p class="hero-description">
+                Quando um garoto desaparece, a cidade toda participa nas buscas. Mas o que encontram são segredos,
+                forças sobrenaturais e uma menina.
+            </p>
+
+            <div class="search-container">
+                <div class="input-wrapper">
+                    <input type="text" id="searchInput" placeholder="Títulos, gente ou gêneros">
+                </div>
+                <div class="select-wrapper">
+                    <select id="genreSelect">
+                        <option value="" disabled selected>Gêneros</option>
+                        <option value="28">Ação</option>
+                        <option value="12">Aventura</option>
+                        <option value="35">Comédia</option>
+                        <option value="18">Drama</option>
+                        <option value="27">Terror</option>
+                    </select>
+                </div>
+                <button class="btn-search">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    Buscar
+                </button>
+            </div>
+        </div>
+
+        <div class="hero-gradient"></div>
+    </main>
+
+    <div class="lists-container">
+
+        <section class="list-section">
+            <h3>Em Alta</h3>
+            <div class="list-row">
+                <div class="movie-item"
+                    onclick="openModal('Wandinha', 'Q73UhUTs6y0', 'Uma série de mistério com toques sobrenaturais que acompanha a trajetória de Wandinha como aluna da Escola Nunca Mais.')">
+                    <img src="https://image.tmdb.org/t/p/w300/9Rj8l6gElLpRL7Kj17iZhrT5Zuw.jpg" alt="Wandinha">
+                </div>
+                <div class="movie-item"
+                    onclick="openModal('Avatar: O Caminho da Água', 'xVnJ3-d4tV0', 'Jake Sully vive com sua nova família no planeta de Pandora. Quando uma ameaça familiar retorna, eles devem trabalhar juntos.')">
+                    <img src="https://image.tmdb.org/t/p/w300/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg" alt="Avatar">
+                </div>
+                <div class="movie-item"
+                    onclick="openModal('Top Gun: Maverick', 'giXco2jaZ_4', 'Depois de mais de 30 anos de serviço, Pete Mitchell está de volta.')">
+                    <img src="https://image.tmdb.org/t/p/w300/62HCnUTziyWcpDaBO2i1DX17ljH.jpg" alt="Top Gun">
+                </div>
+                <div class="movie-item"
+                    onclick="openModal('Mario Bros', 'cJPfM1l2110', 'Mario e Luigi vão parar no reino dos cogumelos e precisam salvar a princesa Peach.')">
+                    <img src="https://image.tmdb.org/t/p/w300/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg" alt="Poster">
+                </div>
+                <div class="movie-item"
+                    onclick="openModal('The Last of Us', 'uLtkt8BonwM', 'Joel e Ellie, uma dupla conectada pela brutalidade do mundo em que vivem.')">
+                    <img src="https://image.tmdb.org/t/p/w300/uKVV4ZKlcY5Gq51k7134xN2c91B.jpg" alt="Poster">
+                </div>
+            </div>
+        </section>
+
+        <section class="list-section">
+            <h3>Top 10 no Brasil de Hoje</h3>
+            <div class="list-row top10-row">
+                <div class="movie-item rank-item"
+                    onclick="openModal('Vingadores: Ultimato', 'PgRmF1_jbe8', 'Após os eventos devastadores de Guerra Infinita, o universo está em ruínas.')">
+                    <span class="rank-number"></span>
+                    <img src="https://image.tmdb.org/t/p/w300/q6725aR8Zs4IwGMXzZT8aC8lh41.jpg" alt="Vingadores">
+                </div>
+                <div class="movie-item rank-item"
+                    onclick="openModal('The Batman', 'B20-56961-A', 'Bruce Wayne atua como vigilante em Gotham City há dois anos.')">
+                    <span class="rank-number"></span>
+                    <img src="https://image.tmdb.org/t/p/w300/wd7b4Bx94KH8SRdT07x81dCT8Q3.jpg" alt="Batman">
+                </div>
+                <div class="movie-item rank-item"
+                    onclick="openModal('Homem Aranha', 'Ae7g6Z7E7k8', 'Peter Parker precisa lidar com as consequências da sua identidade revelada.')">
+                    <span class="rank-number"></span>
+                    <img src="https://image.tmdb.org/t/p/w300/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg" alt="Poster">
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <div id="modalOverlay" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+
+            <div class="modal-video">
+                <iframe id="modalFrame" src="" title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+                <div class="video-shadow"></div>
+            </div>
+
+            <div class="modal-info">
+                <h2 id="modalTitle">Título do Filme</h2>
+                <div class="modal-meta">
+                    <span class="meta-match">98% Relevante</span>
+                    <span class="meta-age">16</span>
+                    <span class="meta-hd">HD</span>
+                </div>
+                <p id="modalDesc">Descrição do filme aqui...</p>
+
+                <div class="modal-buttons">
+                    <button class="btn-play">▶ Assistir</button>
+                    <button class="btn-add">+ Minha Lista</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
