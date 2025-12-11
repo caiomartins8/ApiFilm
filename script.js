@@ -206,5 +206,40 @@ window.addEventListener('scroll', () => {
     else header.classList.remove('black-bg'); // fica transparente no topo
 });
 
+/**
+  rola um carrossel horizontalmente ao clique da seta.
+  @param {string} carouselId o ID do elemento list-row a ser rolado 
+ * @param {string} direction 'left' para rolar para a esquerda, 'right' para a direita.
+ */
+function scrollCarousel(carouselId, direction) {
+    // ach o elemento de lista usando o ID
+    const listRow = document.getElementById(carouselId);
+
+
+    // rola aproximadamente uma tela cheia para a direita/esquerda
+    const scrollAmount = listRow.clientWidth; 
+    
+    //rola 90% da tela para deixar um pouco do próximo filme visoel
+    const scrollOffset = scrollAmount * 0.9; 
+
+    let newScrollLeft;
+
+    if (direction === 'left') {
+        // passa para a esquerda (posição atual - deslocamento)
+        newScrollLeft = listRow.scrollLeft - scrollOffset;
+    } else if (direction === 'right') {
+        // pasa para a direita (posição atual + deslocamento)
+        newScrollLeft = listRow.scrollLeft + scrollOffset;
+    } else {
+        return; 
+    }
+
+    // coloca a rolagem suave
+    listRow.scrollTo({
+        left: newScrollLeft,
+        behavior: 'smooth' // transição suave
+    });
+}
+
 // inicia tudo
 loadHomePage();

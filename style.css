@@ -360,3 +360,41 @@ body {
 .btn-add:hover {
     background: rgba(109, 109, 109, 0.4);
 }
+.carousel-wrapper {
+    position: relative; 
+    margin-bottom: 40px;
+}
+
+.arrow {
+    position: absolute; 
+    top: 50%; 
+    transform: translateY(-50%);
+    z-index: 100; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 1; 
+    }
+
+.left-arrow {
+    left: 0;
+    padding-left: 10px; 
+}
+
+.right-arrow {
+    right: 0;
+    padding-right: 10px; 
+}
+
+.arrow-icon {
+    z-index: 20 ;
+    fill: #fff; 
+    width: 24px; 
+    height: 24px;
+        filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.9)); 
+}
+
+.arrow:hover .arrow-icon {
+    transform: scale(1.1); 
+}

@@ -61,44 +61,55 @@
     <div class="lists-container">
 
         <section class="list-section">
-            <h3>Em Alta</h3>
-            <div class="list-row">
-                <div class="movie-item" onclick="openModal('')">
-                    <img src="" alt="">
-                </div>
-                <div class="movie-item" onclick="openModal('')">
-                    <img src="" alt="">
-                </div>
-                <div class="movie-item" onclick="openModal('')">
-                    <img src="" alt="">
-                </div>
-                <div class="movie-item" onclick="openModal('')">
-                    <img src="" alt="">
-                </div>
-                <div class="movie-item" onclick="openModal('')">
-                    <img src="" alt="">
-                </div>
-            </div>
-        </section>
+    <h3>Em Alta</h3>
+    
+    <div class="carousel-wrapper"> 
 
-        <section class="list-section">
-            <h3>Top 10 no Brasil de Hoje</h3>
-            <div class="list-row top10-row">
-                <div class="movie-item rank-item" onclick="openModal('')">
-                    <img src="" alt="">
-                </div>
+        <div class="arrow left-arrow" onclick="scrollCarousel('trendingRow', 'left')">
+            <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
+                <path d="M9.4 278.6c-12.5-12.5-12.5-32.8 0-45.3l128-128c9.2-9.2 22.9-11.9 34.6-6.1s19.8 17.1 19.8 29.8V400.9c0 12.7-7.8 24.5-19.8 29.8s-25.4 3.1-34.6-6.1l-128-128z"/>
+            </svg>
+        </div>
 
-                <div class="list-row top10-row">
-                    <div class="movie-item rank-item" onclick="openModal('')">
-                        <img src="" alt="">
-                    </div>
+        <div class="list-row" id="trendingRow">
+            <div class="movie-item" onclick="openModal('')"><img src="" alt=""></div>
+       
+        </div>
 
-                    <div class="list-row top10-row">
-                        <div class="movie-item rank-item" onclick="openModal('')">
-                            <img src="" alt="">
-                        </div>
+        <div class="arrow right-arrow" onclick="scrollCarousel('trendingRow', 'right')">
+            <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
+                <path d="M246.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-9.2-9.2-22.9-11.9-34.6-6.1s-19.8 17.1-19.8 29.8V400.9c0 12.7 7.8 24.5 19.8 29.8s25.4 3.1 34.6-6.1l128-128z"/>
+            </svg>
+        </div>
 
-        </section>
+    </div>
+</section>
+
+       <section class="list-section">
+    <h3>Top 10 no Brasil de Hoje</h3>
+    
+    <div class="carousel-wrapper"> 
+
+        <div class="arrow left-arrow" onclick="scrollCarousel('top10Row', 'left')">
+            <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
+                <path d="M9.4 278.6c-12.5-12.5-12.5-32.8 0-45.3l128-128c9.2-9.2 22.9-11.9 34.6-6.1s19.8 17.1 19.8 29.8V400.9c0 12.7-7.8 24.5-19.8 29.8s-25.4 3.1-34.6-6.1l-128-128z"/>
+            </svg>
+        </div>
+
+        <div class="list-row top10-row" id="top10Row">
+            
+            <div class="movie-item rank-item" onclick="openModal('')"><img src="" alt=""></div>
+
+        </div>
+
+        <div class="arrow right-arrow" onclick="scrollCarousel('top10Row', 'right')">
+            <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
+                <path d="M246.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-9.2-9.2-22.9-11.9-34.6-6.1s-19.8 17.1-19.8 29.8V400.9c0 12.7 7.8 24.5 19.8 29.8s25.4 3.1 34.6-6.1l128-128z"/>
+            </svg>
+        </div>
+
+    </div>
+</section>
 
     </div>
 
