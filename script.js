@@ -18,6 +18,29 @@ const modalOverlay = document.getElementById('modalOverlay');
 const modalFrame = document.getElementById('modalFrame');
 const modalTitle = document.getElementById('modalTitle');
 const modalDesc = document.getElementById('modalDesc');
+const modalGenre = document.getElementById('modalGenre'); //elemento para o gênero
+
+const GENRE_MAP = {
+    28: "Ação",
+    12: "Aventura",
+    16: "Animação",
+    35: "Comédia",
+    80: "Crime",
+    99: "Documentário",
+    18: "Drama",
+    10751: "Família",
+    14: "Fantasia",
+    36: "História",
+    27: "Terror",
+    10402: "Música",
+    9648: "Mistério",
+    10749: "Romance",
+    878: "Ficção Científica",
+    10770: "Cinema TV",
+    53: "Thriller",
+    10752: "Guerra",
+    37: "Faroeste"
+};
 
 //fetch 
 // essa funcao serve pra buscar dados em qualquer endereco url
@@ -44,17 +67,17 @@ async function loadHomePage() {
     const popularData = await getJSON(`${API_BASE}/movie/popular?language=pt-BR&page=1`);
     if (popularData && popularData.results) {
         // mostra eles na lista normal
-        displayMovies(popularData.results, listRowAlta, false); 
-        
+        displayMovies(popularData.results, listRowAlta, false);
+
         // pega o primeiro filme e joga no banner grandao
-        setupHero(popularData.results[0]); 
+        setupHero(popularData.results[0]);
     }
 
     //  busca os filmes mais bem avaliados pra fazer o top 10
     const topData = await getJSON(`${API_BASE}/movie/top_rated?language=pt-BR&page=1`);
     if (topData && topData.results) {
         // pega so os 10 primeiros e mostra com estilo de ranking
-        displayMovies(topData.results.slice(0, 10), listRowTop10, true); 
+        displayMovies(topData.results.slice(0, 10), listRowTop10, true);
     }
 }
 
@@ -69,7 +92,7 @@ function displayMovies(movies, container, isTop10) {
 
         // monta o html do card
         let htmlContent = '';
-        
+
         // se for top 10 coloca o numerozao do lado
         if (isTop10) {
             htmlContent += `<span class="rank-number">${index + 1}</span>`;
@@ -79,7 +102,7 @@ function displayMovies(movies, container, isTop10) {
         const imageSrc = movie.poster_path ? IMG_PATH + movie.poster_path : 'https://via.placeholder.com/300x450/333/fff?text=sem+imagem';
 
         htmlContent += `<img src="${imageSrc}" alt="${movie.title}">`;
-        
+
         div.innerHTML = htmlContent;
 
         // quando clicar no card abre os detalhes
@@ -107,7 +130,7 @@ function setupHero(movie) {
 btnSearch.addEventListener('click', async () => {
     const query = searchInput.value; // pega o texto digitado
     const genre = genreSelect.value; // pega o genero escolhido
-    
+
     let url = '';
 
     if (query) {
@@ -121,25 +144,25 @@ btnSearch.addEventListener('click', async () => {
         return; // para tudo se nao tiver nada
     }
 
-   const data = await getJSON(url);
+    const data = await getJSON(url);
     if (data && data.results) {
         document.querySelector('h3').innerText = "resultados da busca";
-        
+
         // uma variável que pode receber a lista original OU a filtrada
         let listaFinal = data.results;
 
         //  Se tiver um gênero selecionado, aplicamos filtro 
         if (genre) {
-             listaFinal = data.results.filter(movie => {
+            listaFinal = data.results.filter(movie => {
                 // O parseInt é importante porque o 'genre' vem da api como texto ("28")
                 // e a lista do filme é numero ([28, 12])
                 return movie.genre_ids.includes(parseInt(genre));
             });
         }
-        
+
         //  a 'listaFinal' (já filtrada) para a função que desenha na tela
-        displayMovies(listaFinal, listRowAlta, false); 
-        
+        displayMovies(listaFinal, listRowAlta, false);
+
 
         window.scrollTo({ top: window.innerHeight - 100, behavior: 'smooth' });
     }
@@ -147,10 +170,25 @@ btnSearch.addEventListener('click', async () => {
 
 // modal busca trailer e abre 
 async function openMovieDetails(movie) {
-    //  preenche titulo e sinopse
+    // preenche titulo e sinopse
     modalTitle.innerText = movie.title;
     modalDesc.innerText = movie.overview || "sinopse nao disponivel.";
-    
+    // preenche o genero do filme no modal
+    if (movie.genre_ids && movie.genre_ids.length > 0) {
+        // verifica se o filme tem a lista de ids de genero  e se essa lista nao esta vazia
+        // usa o genre_map pra transformar o id em nome
+        // se nao achar o id no map, coloca "desconhecido"
+        const genres = movie.genre_ids.map(id => GENRE_MAP[id] || 'desconhecido').join(', ');
+        // o join junta todos os generos em uma string separada por virgula
+
+        // coloca os generos ja formatados dentro do elemento do modal
+        modalGenre.innerText = genres;
+    } else {
+
+        modalGenre.innerText = 'não informado';
+    }
+
+
     // busca os videos na api em portugues
     const videosData = await getJSON(`${API_BASE}/movie/${movie.id}/videos?language=pt-BR`);
     let videoKey = null;
@@ -217,10 +255,10 @@ function scrollCarousel(carouselId, direction) {
 
 
     // rola aproximadamente uma tela cheia para a direita/esquerda
-    const scrollAmount = listRow.clientWidth; 
-    
+    const scrollAmount = listRow.clientWidth;
+
     //rola 90% da tela para deixar um pouco do próximo filme visoel
-    const scrollOffset = scrollAmount * 0.9; 
+    const scrollOffset = scrollAmount * 0.9;
 
     let newScrollLeft;
 
@@ -231,7 +269,7 @@ function scrollCarousel(carouselId, direction) {
         // pasa para a direita (posição atual + deslocamento)
         newScrollLeft = listRow.scrollLeft + scrollOffset;
     } else {
-        return; 
+        return;
     }
 
     // coloca a rolagem suave
